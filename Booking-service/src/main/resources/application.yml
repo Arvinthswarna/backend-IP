@@ -1,0 +1,26 @@
+server :
+  port : 4002
+
+spring:
+  application:
+    name: BOOKING-SERVICE
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    instance:
+      hostname: localhost
+
+the-accounts-service:
+  ribbon:
+    # Eureka vipAddress of the target service
+    DeploymentContextBasedVipAddresses: BOOKING-SERVICE
+
+    #listOfServers: localhost:${SERVER.PORT}
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+
+    # Interval to refresh the server list from the source (ms)
+    ServerListRefreshInterval: 30000
